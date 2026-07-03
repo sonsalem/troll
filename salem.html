@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>احمد الفار للمعلومات</title>
+    <!-- استيراد خط Cairo المميز من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background-color: #dcdcdc;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- انميشن ظهور الصفحات --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated-page {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        /* --- الصفحة الرئيسية (image_4bdbfa.png) --- */
+        .header-title {
+            background-color: #ff0000;
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            font-size: 26px;
+            font-weight: 900;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+            border-radius: 4px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #0026ff;
+            color: white;
+            padding: 25px 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            /* انميشن ناعم عند مرور الماوس */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 38, 255, 0.4);
+            background-color: #001ecc;
+        }
+
+        .card:active {
+            transform: translateY(-2px) scale(1deg);
+        }
+
+        .card span.red-text {
+            color: #ff0000;
+            display: block;
+            margin-top: 8px;
+            font-weight: 900;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover span.red-text {
+            color: #ff4d4d; /* تفتيح اللون الأحمر قليلاً عند التمرير */
+        }
+
+        .full-width-card {
+            grid-column: span 2;
+            justify-self: center;
+            width: 70%;
+        }
+
+        /* --- صفحة الصدمة (image_4bdbfb.png) --- */
+        .hidden {
+            display: none !important;
+        }
+
+        .revealed-box {
+            background-color: black;
+            color: white;
+            padding: 35px 25px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.8;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            border: 1px solid #333;
+        }
+
+        .back-btn {
+            margin-top: 25px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- الصفحة الأولى: القائمة والخيارات الثلاثة -->
+        <div id="page-menu" class="animated-page" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <div class="header-title">سالم الفار للمعلومات</div>
+            
+            <div class="grid-container">
+                <button class="card" onclick="goToRevealPage()">
+                    لو عايز تاخد اعفا من العسكرية
+                    <span class="red-text">اضغط هنا</span>
+                </button>
+                <button class="card" onclick="goToRevealPage()">
+                    لو عايز تاخد اعفا من الجيش
+                    <span class="red-text">اضغط هنا</span>
+                </button>
+            </div>
+
+            <button class="card full-width-card" onclick="goToRevealPage()">
+                لو عايز تتجوز حبيبتك
+                <span class="red-text">اضغط هنا</span>
+            </button>
+        </div>
+
+        <!-- الصفحة الثانية: رسالة المقلب المفاجئة -->
+        <div id="page-reveal" class="hidden" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <div class="revealed-box">
+                ضحكت عليك مفيش حاجة منهم شغاله ههه وانت زي العبيط من كتر سوداوية حياتك وبؤسها لما قريت كلمة خليتك تتخيل سعادة و رفاهية متحلمش توصل ليها جالك تست من الدوبامين الزائف و قلت طب ما اجرب ههه علي اساس انك بتهزر بس انت دلوقتي زعلت و نفسك اتكسرت ههه
+            </div>
+            <button class="back-btn" onclick="goToMenuPage()">رجوع للخلف</button>
+        </div>
+    </div>
+
+    <script>
+        const pageMenu = document.getElementById('page-menu');
+        const pageReveal = document.getElementById('page-reveal');
+
+        function goToRevealPage() {
+            pageMenu.classList.add('hidden');
+            pageReveal.classList.remove('hidden');
+            
+            // إعادة تفعيل أنميشن الظهور لصفحة المقلب
+            pageReveal.classList.remove('animated-page');
+            void pageReveal.offsetWidth; // حيلة برمجية لإعادة تشغيل الأنميشن (Reflow)
+            pageReveal.classList.add('animated-page');
+        }
+
+        function goToMenuPage() {
+            pageReveal.classList.add('hidden');
+            pageMenu.classList.remove('hidden');
+            
+            // إعادة تفعيل أنميشن الظهور للقائمة الرئيسية
+            pageMenu.classList.remove('animated-page');
+            void pageMenu.offsetWidth; 
+            pageMenu.classList.add('animated-page');
+        }
+    </script>
+
+</body>
+</html>
